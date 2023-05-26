@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container mt-3">
+        <hr />
+        <nav class="nav nav-pills nav-fill">
+            <a class="nav-link" href="/makeQuery_msnodesqlv8_win_auth">msnodesqlv8 win auth</a>
+            <a class="nav-link active" href="#">mssql win auth</a>
+        </nav>
+        <hr />
+        <div class="tab-content">
+            <div class="tab-pane fade show active">
+
+                <form action="/makeQuery_mssql_win_auth" method="POST" onsubmit="loader.show()">
+                    <div class="container mt-5">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <h3>Connection Object</h3>
+                                <textarea type="text" name="connectionObject" class="form-control text-left" rows="8"
+                                    autocomplete="off" spellcheck="false">{{connectionObject}}</textarea>
+                            </div>
+                            <div class="col">
+                                <h3>Query</h3>
+                                <textarea type="text" name="query" class="form-control text-left" rows="8"
+                                    autocomplete="off" spellcheck="false">{{query}}</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-secondary" type="submit">Make Query</button>
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <h3>Result</h3>
+                                <div>{{rows}}</div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <h3>Error</h3>
+                                <div>{{err}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="loader_mask">
+        <div class="loader"></div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

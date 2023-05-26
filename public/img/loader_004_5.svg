@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: transparent; display: block;" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<g transform="translate(50,50)"><circle cx="0" cy="0" r="8.5" fill="none" stroke="#555" stroke-width="2.5000000000000004" stroke-dasharray="26 26">
+<animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="0" repeatCount="indefinite"></animateTransform>
+</circle><circle cx="0" cy="0" r="16" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="52 52">
+<animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.2" repeatCount="indefinite"></animateTransform>
+</circle><circle cx="0" cy="0" r="25" fill="none" stroke="#555" stroke-width="2" stroke-dasharray="78 78">
+<animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.4" repeatCount="indefinite"></animateTransform>
+</circle><circle cx="0" cy="0" r="33" fill="none" stroke="#05A7DF" stroke-width="2.5" stroke-dasharray="104 104">
+<animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.6" repeatCount="indefinite"></animateTransform>
+</circle><circle cx="0" cy="0" r="41" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="130 130">
+<animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.8" repeatCount="indefinite"></animateTransform>
+</circle><circle cx="0" cy="0" r="47" fill="none" stroke="#333" stroke-width="4" stroke-dasharray=".5 2">
+<animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="15s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="0" repeatCount="indefinite"></animateTransform>
+</circle></g>
+</svg>
