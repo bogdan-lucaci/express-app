@@ -38,11 +38,7 @@ const routeHandler = {
     makeQuery_msnodesqlv8_win_auth: async (req, res) => {
         const _templateFile = await fs.readFileSync('templates/index_msnodesqlv8.html', 'utf8')
         //const _templateFileWithActiveTab = utils.setTabActive(_templateFile, 'nav-msnodesqlv8')
-        const connectionString = await req.body.connectionString
-        const query = await req.body.query
-
-        const sql = require('msnodesqlv8')
-        sql.query(connectionString, query, (err, rows) => {
+        const _displayData = (err, rows) => {
             utils.displayData(
                 res,
                 _templateFile,
@@ -56,15 +52,18 @@ const routeHandler = {
                     rows: utils.getRowsHTML(rows)
                 }
             )
-        })
+        }
+        const connectionString = await req.body.connectionString
+        const query = await req.body.query
+
+        const sql = require('msnodesqlv8')
+        sql.query(connectionString, query, _displayData)
 
     },
     makeQuery_mssql_win_auth: async (req, res) => {
         try {
             const _templateFile = await fs.readFileSync('templates/index_mssql.html', 'utf8')
             //const _templateFileWithActiveTab = utils.setTabActive(_templateFile, 'nav-mssql')
-            const _connectionObject = await JSON.parse(req.body.connectionObject)
-            const _query = await req.body.query
             const _handleError = err => {
                 fs.readFile('templates/index_mssql.html', 'utf8', async (fileErr, templateFile) => {
                     const _templateFileWithData = utils.addData2View(
@@ -78,27 +77,30 @@ const routeHandler = {
                     res.send(_templateFileWithData)
                 })
             }
+            const _displayData = (err, result) => {
+                utils.displayData(
+                    res,
+                    _templateFile,
+                    {
+                        ...defaultValues,
+                        connectionObject: JSON.stringify(_connectionObject, null, '\t'),
+                        query: _query,
+                    },
+                    {
+                        err,
+                        rows: utils.getRowsHTML(result.recordset)
+                    }
+                )
+            }            
+            const _connectionObject = await JSON.parse(req.body.connectionObject)
+            const _query = await req.body.query
 
             const sql = require('mssql/msnodesqlv8')
             try {
                 const _connection = await new sql.ConnectionPool(_connectionObject)
                 const _pool = await _connection.connect()
                 const _request = new sql.Request(_pool)
-                await _request.query(_query, (err, result) => {
-                    utils.displayData(
-                        res,
-                        _templateFile,
-                        {
-                            ...defaultValues,
-                            connectionObject: JSON.stringify(_connectionObject, null, '\t'),
-                            query: _query,
-                        },
-                        {
-                            err,
-                            rows: utils.getRowsHTML(result.recordset)
-                        }
-                    )
-                })
+                await _request.query(_query, _displayData)
             }
             catch (err) {
                 _handleError(err)

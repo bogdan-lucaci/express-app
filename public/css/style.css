@@ -13,7 +13,7 @@
 }
 
 .loader_mask .loader {
-    background: url('/img/loader_ripple.svg') no-repeat center center;
+    /* background: url('/img/loader_ripple.svg') no-repeat center center; */
     background: url('/img/loader_004_5.svg') no-repeat center center;
     width: 20rem;
     height: 20rem;
