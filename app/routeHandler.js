@@ -97,9 +97,9 @@ const routeHandler = {
 
             const sql = require('mssql/msnodesqlv8')
             try {
-                const _connection = await new sql.ConnectionPool(_connectionObject)
-                const _pool = await _connection.connect()
-                const _request = new sql.Request(_pool)
+                const _pool = await new sql.ConnectionPool(_connectionObject)
+                const _connection = await _pool.connect()
+                const _request = new sql.Request(_connection)
                 await _request.query(_query, _displayData)
             }
             catch (err) {
