@@ -6,10 +6,11 @@ const defaultValues = {
     connectionObject: JSON.stringify({
         database: "Europay",
         server: "AG-RIA-GPDEV.nuvei.local",
-        port: "1443",
+        port: 1443,
         driver: "msnodesqlv8",
         options: {
-            trustedConnection: true
+            trustedConnection: true,
+            trustServerCertificate: true
         }
     }, null, "\t"),
     query: "SELECT TOP (3) * FROM [Europay].[dbo].[Payments]",
@@ -27,6 +28,11 @@ const routeHandler = {
 
         if (req.url === '/makeQuery_msnodesqlv8_win_auth')
             fs.readFile(`templates/index_msnodesqlv8.html`, 'utf8', (err, templateFile) => {
+                res.send(utils.addData2View(templateFile, defaultValues))
+            })
+
+        if (req.url === '/makeQuery_mssql_msnodesqlv8_win_auth')
+            fs.readFile(`templates/index_mssql_msnodesqlv8.html`, 'utf8', (err, templateFile) => {
                 res.send(utils.addData2View(templateFile, defaultValues))
             })
 
@@ -60,12 +66,12 @@ const routeHandler = {
         sql.query(connectionString, query, _displayData)
 
     },
-    makeQuery_mssql_win_auth: async (req, res) => {
+    makeQuery_mssql_msnodesqlv8_win_auth: async (req, res) => {
         try {
-            const _templateFile = await fs.readFileSync('templates/index_mssql.html', 'utf8')
+            const _templateFile = await fs.readFileSync('templates/index_mssql_msnodesqlv8.html', 'utf8')
             //const _templateFileWithActiveTab = utils.setTabActive(_templateFile, 'nav-mssql')
             const _handleError = err => {
-                fs.readFile('templates/index_mssql.html', 'utf8', async (fileErr, templateFile) => {
+                fs.readFile('templates/index_mssql_msnodesqlv8.html', 'utf8', async (fileErr, templateFile) => {
                     const _templateFileWithData = utils.addData2View(
                         templateFile, {
                         ...defaultValues,
@@ -107,7 +113,7 @@ const routeHandler = {
             }
         }
         catch (err) {
-            fs.readFile('templates/index_mssql.html', 'utf8', async (fileErr, templateFile) => {
+            fs.readFile('templates/index_mssql_msnodesqlv8.html', 'utf8', async (fileErr, templateFile) => {
                 const _templateFileWithData = utils.addData2View(
                     templateFile,
                     {
@@ -122,6 +128,68 @@ const routeHandler = {
             })
         }
     },
+    makeQuery_mssql_win_auth: async (req, res) => {
+        try {
+            const _templateFile = await fs.readFileSync('templates/index_mssql.html', 'utf8')
+            //const _templateFileWithActiveTab = utils.setTabActive(_templateFile, 'nav-mssql')
+            const _handleError = err => {
+                fs.readFile('templates/index_mssql.html', 'utf8', async (fileErr, templateFile) => {
+                    const _templateFileWithData = utils.addData2View(
+                        templateFile, {
+                        ...defaultValues,
+                        connectionObject: JSON.stringify(_connectionObject, null, '\t'),
+                        query: _query,
+                        err
+                    })
+
+                    res.send(_templateFileWithData)
+                })
+            }
+            const _displayData = (err, result) => {
+                utils.displayData(
+                    res,
+                    _templateFile,
+                    {
+                        ...defaultValues,
+                        connectionObject: JSON.stringify(_connectionObject, null, '\t'),
+                        query: _query,
+                    },
+                    {
+                        err,
+                        rows: utils.getRowsHTML(result.recordset)
+                    }
+                )
+            }            
+            const _connectionObject = await JSON.parse(req.body.connectionObject)
+            const _query = await req.body.query
+
+            const sql = require('mssql')
+            try {
+                const _pool = await new sql.ConnectionPool(_connectionObject)
+                const _connection = await _pool.connect()
+                const _request = new sql.Request(_connection)
+                await _request.query(_query, _displayData)
+            }
+            catch (err) {
+                _handleError(err)
+            }
+        }
+        catch (err) {
+            fs.readFile('templates/index_mssql.html', 'utf8', async (fileErr, templateFile) => {
+                const _templateFileWithData = utils.addData2View(
+                    templateFile,
+                    {
+                        ...defaultValues,
+                        connectionObject: req.body.connectionObject,
+                        query: req.body.query,
+                        err
+                    }
+                )
+
+                res.send(_templateFileWithData)
+            })
+        }
+    },    
     404: (req, res, next) => {
         res.status(404)
         // respond with html page

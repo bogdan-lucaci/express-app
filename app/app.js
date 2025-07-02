@@ -10,6 +10,8 @@ app.use(express.static(`${__dirname}/../public`));
 app.get("/", routeHandler.index)
 app.get("/makeQuery_msnodesqlv8_win_auth", routeHandler.index)
 app.post("/makeQuery_msnodesqlv8_win_auth", routeHandler.makeQuery_msnodesqlv8_win_auth)
+app.get("/makeQuery_mssql_msnodesqlv8_win_auth", routeHandler.index)
+app.post("/makeQuery_mssql_msnodesqlv8_win_auth", routeHandler.makeQuery_mssql_msnodesqlv8_win_auth)
 app.get("/makeQuery_mssql_win_auth", routeHandler.index)
 app.post("/makeQuery_mssql_win_auth", routeHandler.makeQuery_mssql_win_auth)
 

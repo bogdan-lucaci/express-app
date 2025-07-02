@@ -10,27 +10,30 @@
 </head>
 
 <body>
+
     <div class="container mt-3">
         <hr />
         <nav class="nav nav-pills nav-fill">
-            <a class="nav-link active" aria-current="page" href="#">msnodesqlv8 win auth</a>
-            <a class="nav-link" href="/makeQuery_mssql_msnodesqlv8_win_auth">mssql/msnodesqlv8 win auth</a>
+            <a class="nav-link" href="/makeQuery_msnodesqlv8_win_auth">msnodesqlv8 win auth</a>
+            <a class="nav-link active" href="#">mssql/msnodesqlv8 win auth</a>
             <a class="nav-link" href="/makeQuery_mssql_win_auth">mssql win auth</a>
         </nav>
         <hr />
         <div class="tab-content">
             <div class="tab-pane fade show active">
 
-                <form action="/makeQuery_msnodesqlv8_win_auth" method="POST" onsubmit="loader.show()">
+                <form action="/makeQuery_mssql_msnodesqlv8_win_auth" method="POST" onsubmit="loader.show()">
                     <div class="container mt-5">
                         <div class="row mb-4">
                             <div class="col">
-                                <h3>Connection String</h3>
-                                <textarea type="text" name="connectionString" class="form-control text-left" rows="5" autocomplete="off" spellcheck="false">{{connectionString}}</textarea>
+                                <h3>Connection Object</h3>
+                                <textarea type="text" name="connectionObject" class="form-control text-left" rows="8"
+                                    autocomplete="off" spellcheck="false">{{connectionObject}}</textarea>
                             </div>
                             <div class="col">
                                 <h3>Query</h3>
-                                <textarea type="text" name="query" class="form-control text-left" rows="5" autocomplete="off" spellcheck="false">{{query}}</textarea>
+                                <textarea type="text" name="query" class="form-control text-left" rows="8"
+                                    autocomplete="off" spellcheck="false">{{query}}</textarea>
                             </div>
                         </div>
                         <div class="row">
